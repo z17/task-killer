@@ -1,0 +1,7 @@
+ErrorDocument 404 /errors/404.php
+AddDefaultCharset UTF-8
+Options +FollowSymLinks
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^/index.php$
+RewriteCond %{HTTP_HOST} ^www.task-killer\.ru$ [NC]
+RewriteRule ^(.*)$ http://task-killer.ru/$1 [R=301,L]

@@ -70,7 +70,7 @@ else
               <b><?=$data['user']['dateregister']?></b>
             </p>
             <p>
-              <li><a href="#">Редактировать профиль</a></li>
+              <li><a href="/profile/edit">Редактировать профиль</a></li>
             </p>
           </div>
         </td>

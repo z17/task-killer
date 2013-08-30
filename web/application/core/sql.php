@@ -57,4 +57,15 @@ class Base {
 		$sql -> bindParam (':dateregister',$dateregister,PDO::PARAM_STR);
 		$a = $sql -> execute();
 	}
+	function updateUser($login,$name,$password,$email)
+	{
+		$sql = 'UPDATE users SET name = :name, password = :password, email = :email
+				WHERE login = :login';
+		$sql = $this->base -> prepare($sql);
+		$sql -> bindParam (':name',$name,PDO::PARAM_STR);
+		$sql -> bindParam (':password',$password,PDO::PARAM_STR);
+		$sql -> bindParam (':email',$email,PDO::PARAM_STR);
+		$sql -> bindParam (':login',$login,PDO::PARAM_STR);
+		$a = $sql -> execute();
+	}
 }

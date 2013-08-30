@@ -10,6 +10,7 @@ class Controller_Main extends Controller
     function action_index()
     {		
         $data = $this->model->get_data();
+		$data['user'] = $this -> model -> user;
         $this->view->generate('main_view.php', 'template_view.php', $data);
     }
 }

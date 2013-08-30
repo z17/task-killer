@@ -2,8 +2,7 @@
 class Model_Register extends Model
 {
     public function get_data()
-    {		
-		
+    {				
 		$data['login'] = isset($_POST['login']) ? $_POST['login'] : '';
 		$data['password'] = isset($_POST['password']) ? $_POST['password'] : '';
 		$data['email'] = isset($_POST['email']) ? $_POST['email'] : '';

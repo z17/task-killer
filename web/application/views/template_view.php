@@ -21,7 +21,7 @@ if (!isset($data['navkac']))
 				<div class="navk" <?php if ($data['navkac']==='contacts') { ?> id="navkac" <?php }?>><a class="navk1" href="/contacts" title="Контакты">Контакты</a></div>
 				<div class="navk" <?php if ($data['navkac']==='profile') { ?> id="navkac" <?php }?>><a class="navk1" href="/profile" title="Профиль">Профиль</a></div>
 			</div> 
-			<div id="banner"></div>
+			<div id="banner1"><img src="/img/banner.png" alt=""></div>
 		</div>
 	<div id="middle">
 		<div id="content">
@@ -30,18 +30,7 @@ if (!isset($data['navkac']))
 			</div>
 		</div>
 		<div id="sidebar"> 
-			<div class="block1">
-				<div class="block1title">Личный кабинет</div>
-				<div class="block1content">
-					<p class="balans">Ваш баланс: <span style="color:#000;">10 рублей</span></p>
-					<div class="prlink">
-						<li><a href="#">Пополнить баланс »</a></li>
-						<li><a href="#">Заказанные задачи »</a></li>
-						<li><a href="order.php">Заказать задачу »</a></li><li><a href="solve.php">Выполнить задание »</a></li><li><a href="profile.php">Профиль »</a></li>
-						<div align="right" style="margin-top:55px;"><a href="exitsession.php">Выход</a></div>
-					</div>
-				</div>
-			</div>
+			<?php include_once 'application/views/sidebar_view.php'?>
 		</div>
 		<div id="clear"></div>
 	</div>

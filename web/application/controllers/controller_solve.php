@@ -11,7 +11,8 @@ class Controller_Solve extends Controller
     function action_index()
     {		
         $data = $this->model->get_data();
-        $this->view->generate('solve_view.php', 'template_view.php', $data);
+		$data['user'] = $this -> model -> user;
+        $this->view->generate('solve/solve_view.php', 'solve/template_view.php', $data);
     }
 
 }

@@ -11,6 +11,7 @@ class Controller_Contacts extends Controller
     function action_index()
     {		
         $data = $this->model->get_data();
+		$data['user'] = $this -> model -> user;
         $this->view->generate('contacts_view.php', 'template_view.php', $data);
     }
 

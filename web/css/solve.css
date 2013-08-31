@@ -5,16 +5,15 @@ body {background:#d7d7d7; }
 
 
 #header {  font-size:30pt; padding:20px 0 20px 30px; border-bottom:1px solid #f1f1f1;}
-#content { width:770px; padding:5px; }
+#content { width:770px; padding:10px 5px 5px 5px; }
 #sidebar{float:left;width:220px; background:#f5f5f5; margin:0px; padding:0px;}
 #leftc {float:left; width:780px;   }
-.clear{clear:both;}
 
 .prof {text-align:right; padding:10px;}
 .block { width:150px; margin:20px auto;font:10pt arial; }
 .blocktitle { font-weight: bold; text-align:center;}
 .blockcontent {padding:5px;}
-img {border:0px;}
+
 
 .zakaz {color:#ff0000; float:left; margin:55px 0px 0px 350px;}
 
@@ -28,6 +27,6 @@ a:hover {text-decoration:underline; color:#000000;}
 .linetask {background:url('../img/solver/line2.png') no-repeat ; width:600px; height:1px; margin:5px auto;}
 .more {float:right; font:bold 10pt; padding: 5px 5px 0px 0px;}
 
-#footer {width:803px; height:56px; border-top:1px solid #f1f1f1; color:#777777;}
+#footer {width:770px; height:56px; border-top:1px solid #f1f1f1; color:#777777;}
 .footerr {float:right; margin:25px 5px 0px 0px;}
 .footerl {float:left; margin:11px 0px 0px 20px;}

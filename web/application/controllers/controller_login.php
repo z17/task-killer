@@ -12,7 +12,7 @@ class Controller_Login extends Controller
     {		
         $data = $this->model->get_data();		
 		$data['user'] = $this -> model -> user;
-        $this->view->generate('login_view.php', 'template_view.php', $data);
+        $this->view->generate('login_view.php', 'template_guest_view.php', $data);
     }
 
 }

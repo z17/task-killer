@@ -11,7 +11,7 @@
 				<li><a href="#">Заказанные задачи »</a></li>
 				<li><a href="/order">Заказать задачу »</a></li><li><a href="solve.php">Выполнить задание »</a></li>
 				<li><a href="/profile">Профиль »</a></li>
-				<div style="margin-top:50px; text-align:right;"><a href="/exit">Выход</a></div>
+				<div style="margin-top:50px; text-align:right;"><a href="/profile/exit">Выход</a></div>
 			</div>
 		</div>
 	<?php

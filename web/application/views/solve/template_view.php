@@ -3,6 +3,7 @@
 <head>
 <title><?=$data['title']?> - Task-killer</title>
 <link href="/css/solve.css" type="text/css" rel="stylesheet">
+<link href="/css/style.css" type="text/css" rel="stylesheet">
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 </head>
 <body>

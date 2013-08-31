@@ -25,14 +25,11 @@ if (!isset($data['navkac']))
 			<div id="banner1"><img src="/img/banner.gif" alt=""></div>
 		</div>
 	<div id="middle">
-		<div id="content">
+		<div id="contentprofile">
 			<div class="text">
 				<?php include_once 'application/views/'.$content_view; ?>
 			</div>
-		</div>
-		<div id="sidebar"> 
-			<?php include_once 'application/views/sidebar_view.php'?>
-		</div>
+		</div>		
 		<div id="clear"></div>
 	</div>
 	<div id="footer">

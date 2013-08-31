@@ -33,8 +33,7 @@ class Model_Profile extends Model
 		$data['fl'] = isset($_POST['fl']) ? $_POST['fl'] : false;
 		$data['newEmail'] = trim($data['newEmail']); // убираем пробелы
 		
-		$userLogin = $_SESSION['userlogin'];		
-		$data['user'] = $this -> base -> getUser($userLogin); // получаем данные пользователя
+		$data['user'] = $this -> user;	 // получаем данные пользователя
 		
 		if ($data['fl']) // если отправили форму
 		{
@@ -79,4 +78,21 @@ class Model_Profile extends Model
 		return $data;
 		
     }
+	
+	public function get_exit_data()
+	{
+		if (!isset($_SESSION['userid']))
+		{
+			$data['message'] = "Для выхода необходимо авторизоваться";
+		}
+		else
+		{
+			session_destroy();
+			$data['message'] = "Выход выполнен";
+		}
+	
+		$data['navkac'] = 'profile';
+		$data['title'] = "Выход";
+		return $data;
+	}
 }

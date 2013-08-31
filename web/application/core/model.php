@@ -1,7 +1,6 @@
 <?php
 class Model
 {
-	public $numPosts;
 	public $base;
 	public $passkey;
 	public $user;

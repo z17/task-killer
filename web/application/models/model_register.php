@@ -38,7 +38,7 @@ class Model_Register extends Model
 				$str = "Некорректный e-mail";
 				array_push($data['errors'],$str);
 			}
-			if (is_array($data['errors']))
+			if (empty($data['errors']))
 			{
 				// если ошибок нет - регистрируем
 				$data['password'] = md5(md5($data['password'].$this->passkey));

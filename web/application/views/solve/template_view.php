@@ -48,6 +48,7 @@
 			<li><a href="/solve">Просмотр заданий</a></li>
 			<li><a href="#">Сдать задачу</a></li>
 			<li><a href="#">Отказаться</a></li>
+			<li><a href="/solve/additem">Добавить предмет</a></li>
 			</div>
 		</div>
 		</div>

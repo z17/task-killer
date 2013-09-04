@@ -41,7 +41,8 @@ a:active {text-decoration:underline; color:#000;}
 .footertextl  img {margin-top:4px;}
 
 .pricetable {width:100%; padding:1px solid #aaa;}
-.pricetable td {padding-bottom:2px; padding-top:2px; text-align:center;}
+.pricetable tr:first-child  td{text-align:center;}
+.pricetable td {padding-bottom:2px; padding-top:2px; text-align:right;}
 .pricetd {padding-right:2px; text-align:left !important;}
 
 #middle {width:1012px;  min-height:300px; display:block; text-align:left; margin:0 auto; }
@@ -83,7 +84,7 @@ a:active {text-decoration:underline; color:#000;}
 .loginbut a:hover {text-decoration:none; color:#ff9000;}
 .loginbut a:active {text-decoration:underline; color:#ff9000;}
 
-
-
 .reftable { border-top:1px #aaa solid;border-right:1px #aaa solid; text-align:center; width:100%}
 .reftable td {border:1px #aaa solid; padding:5px; border-top:0px; border-right:0px;}
+
+.orderTable tr td:last-child {vertical-align: top;}

@@ -8,69 +8,114 @@ class Model_Order extends Model
 		$data['itemId'] = isset($_POST['itemId']) ? $_POST['itemId'] : NULL;
 		$data['fl'] = isset($_POST['fl']) ? $_POST['fl'] : false;
 
+		// нужно допилить вывод суммы заказа (вероятно на js)
+		// сильно много условий, нужно будет что-то сделать
+		// вообще тут слишком много кода, и по-моему всё это бред
+		
+		// + проверка размеров изображения и кучу ещё всего нужно сделать, но влом
+		
 		if ($data['fl']) 
 		{			
 			$data['errors'] = array();
 			
+			$correctDate = false;		// флаг корректности даты
 			if ($data['date'] == NULL)
 			{
 				$str = "Не указана дата";
 				array_push($data['errors'],$str);
 			}
-			$currentDate = date("Y-m-d");
-			$data['date'] = explode("-",$data['date']);
-			$data['date'] = $data['date'][2]."-".$data['date'][1]."-".$data['date'][0]; // формирование даты в нужное представление для базы
-			if ((strtotime($currentDate) > strtotime($data['date'])) or (!preg_match("/\d\d\d\d-\d\d-\d\d/",$data['date'])))
+			else
 			{
-				$str = 'Некорректная дата';
-				array_push($data['errors'],$str);
+				$currentDate = date("Y-m-d");
+				$validDate =  strtotime("$currentDate + 3 day");		// допустимая дата выполнения заказа: день заказа + 3 дня
+				$validDate = date("Y-m-d", $validDate);
+				$data['date'] = explode("-",$data['date']);
+				$data['date'] = $data['date'][2]."-".$data['date'][1]."-".$data['date'][0]; // формирование даты в нужное представление для базы
+				
+				if ((strtotime($currentDate) > strtotime($data['date'])) or (!preg_match("/\d\d\d\d-\d\d-\d\d/",$data['date'])))
+				{
+					$str = 'Некорректная дата';
+					array_push($data['errors'],$str);
+				}
+				elseif (strtotime($validDate) > strtotime($data['date']))		// проверка срока сдачи заказа
+				{
+					$str = 'Ранний срок выполнения заказа ' . date("d-m-Y", strtotime($validDate));
+					array_push($data['errors'],$str);
+				}
+				else
+				{
+					$correctDate = true;
+				}
 			}
-
 			if ($data['itemId'] == NULL)
 			{
 				$str = "Не выбран предмет";
 				array_push($data['errors'],$str);
 			}
-			// вероятно это стоит вынести в 1 функцию, а то дублирование кода
-			if (!empty($_FILES['file1']['name']))
+			elseif ($correctDate)
 			{
-				$url = explode('.', $_FILES['file1']['name']);
-				$format = array_pop($url);
-				if ((strtolower($format) != 'jpg') and (strtolower($format) != 'gif') and (strtolower($format) != 'png'))
-				{
-					$str = "Недопустимый формат файла №1";
-					array_push($data['errors'],$str);
+				$price = $this -> base -> getPrice($data['itemId']);
+				$diffDate = strtotime($data['date']) - strtotime($currentDate + "1 day");	// считаем сколько дней до даты сдачи заказа не включая сегодня
+				$diffDate = (int)date("d", $diffDate);
+				// рассчёт стоимости относительно базовой (базовая - за срок 5 дней)
+				switch($correctDate) {
+					case 3: 
+						$price = $price * 1.6;
+						break;
+					case 4: 
+						$price = $price * 1.4;
+						break;
+					case 5: 
+						$price = $price;
+						break;
+					default:
+						$price = $price * 0.8;
 				}
-				$name = md5(implode($url));		// создаём уникальное имя
-				$uploadfile = $_SERVER['DOCUMENT_ROOT']."/files/".$name.".".$format;
-				move_uploaded_file($_FILES['file1']['tmp_name'], $uploadfile);
+				if ($price > $this -> user['balance'])
+					{
+						$str = "На ващем счету недостаточно средств, <a href=\"/pay\" title=\"Пополнить счёт\">пополнить</a>";
+						array_push($data['errors'],$str);
+					}
+								
 			}
-			if (!empty($_FILES['file2']['name']))
+			$i = 0;	// счётчик номера файла
+			$filesName = array(); 
+			foreach ($_FILES as $name => $file )
 			{
-				$url = explode('.', $_FILES['file2']['name']);
-				$format = array_pop($url);
-				if ((strtolower($format) != 'jpg') and (strtolower($format) != 'gif') and (strtolower($format) != 'png'))
+				$i++;
+				if (!empty($file['name']))
 				{
-					$str = "Недопустимый формат файла №2";
-					array_push($data['errors'],$str);
+					$url = explode('.', $file['name']);
+					$format = array_pop($url);					
+					if ((strtolower($format) != 'jpg') and (strtolower($format) != 'gif') and (strtolower($format) != 'png'))
+					{
+						$str = "Недопустимый формат файла ".$i;						
+						array_push($data['errors'],$str);
+					}
+					else
+					{
+						array_push($filesName,array('tmp_name' => $file['tmp_name'],'name'=>$name, 'url'=>$url, 'format'=>$format));	// записываем подходящие к загрузке файлы
+					}
 				}
-				$name = md5(implode($url));
-				$uploadfile = $_SERVER['DOCUMENT_ROOT']."/files/".$name.".".$format;
-				move_uploaded_file($_FILES['file2']['tmp_name'], $uploadfile);
 			}
-			if (!empty($_FILES['file3']['name']))
+		
+			
+			if (empty($data['errors']))
 			{
-				$url = explode('.', $_FILES['file3']['name']);
-				$format = array_pop($url);
-				if ((strtolower($format) != 'jpg') and (strtolower($format) != 'gif') and (strtolower($format) != 'png'))
-				{
-					$str = "Недопустимый формат файла №3";
-					array_push($data['errors'],$str);
+				// перемещаем файлы	
+				$files = array(NULL,NULL,NULL);
+				$i = 0; 		// счётчик
+				foreach ($filesName as $file)
+				{		
+					$name = md5(implode($file['url']));		// создаём уникальное имя (нужно будет добавить ещё ID task)
+					$files[$i] = $_SERVER['DOCUMENT_ROOT']."/files/".$name.".".$file['format'];
+					move_uploaded_file($file['tmp_name'], $files[$i]);
+					// получаем url файла для записи в базу
+					$files[$i] = substr($files[$i],strlen($_SERVER['DOCUMENT_ROOT']),strlen($files[$i]) - strlen($_SERVER['DOCUMENT_ROOT']));
+					$i++;					
 				}
-				$name = md5(implode($url));
-				$uploadfile = $_SERVER['DOCUMENT_ROOT']."/files/".$name.".".$format;
-				move_uploaded_file($_FILES['file3']['tmp_name'], $uploadfile);
-			}
+				$this -> base -> addTask($this->user['id'],$data['itemId'],$data['date'],$data['task'],$files[0],$files[1],$files[2],$price);				
+			}			
 		}
 		else
 		{

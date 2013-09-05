@@ -21,7 +21,7 @@
 <tr>
 	<td>Предмет*</td>
     <td>
-	<select name="item">
+	<select name="itemId">
 		<?php 
 		foreach ($data['items'] as $item)
 		{
@@ -52,9 +52,9 @@
 		<p class="moreInfo">Вы можете прикрепить одну или несколько фотографий условия задачи<br>jpg, png или gif</p>
 	</td>
 	<td>		
+		<p><input type="file" name="file0" /></p>
 		<p><input type="file" name="file1" /></p>
 		<p><input type="file" name="file2" /></p>
-		<p><input type="file" name="file3" /></p>
 	</td>
 </tr>
 <tr>

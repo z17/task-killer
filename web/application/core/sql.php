@@ -99,4 +99,34 @@ class Base {
 		$items = $sql -> fetchAll();
 		return $items;
 	}
+	function getPrice($id)
+	{		
+		$sql = 'SELECT price FROM items WHERE id = :id';
+		$sql = $this-> base -> prepare($sql);
+		$sql -> bindParam (':id',$id,PDO::PARAM_INT);
+		$sql -> execute();
+		$price = $sql -> fetch();
+		$price = $price['price'];
+		return $price;
+	}
+	function addTask($id_author,$id_item,$time_end,$text,$file1,$file2,$file3,$price)
+	{	
+		$status = 'started';	
+		$time_start = date("Y-m-d H:i:s");	
+		$sql = 'INSERT INTO tasks (id_author, id_item, time_start, time_end, text, file1, file2, file3, price, status)
+				VALUES (:id_author, :id_item, :time_start, :time_end, :text, :file1, :file2, :file3, :price, :status)';
+		$sql = $this-> base -> prepare($sql);
+		$sql -> bindParam (':id_author',$id_author,PDO::PARAM_INT);
+		$sql -> bindParam (':id_item',$id_item,PDO::PARAM_INT);
+		$sql -> bindParam (':time_start',$time_start,PDO::PARAM_INT);
+		$sql -> bindParam (':time_end',$time_end,PDO::PARAM_INT);
+		$sql -> bindParam (':text',$text,PDO::PARAM_INT);
+		$sql -> bindParam (':file1',$file1,PDO::PARAM_INT);
+		$sql -> bindParam (':file2',$file2,PDO::PARAM_INT);
+		$sql -> bindParam (':file3',$file3,PDO::PARAM_INT);
+		$sql -> bindParam (':price',$price,PDO::PARAM_INT);
+		$sql -> bindParam (':status',$status,PDO::PARAM_INT);
+		$sql -> execute();
+		return $price;
+	}
 }

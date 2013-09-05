@@ -9,8 +9,6 @@
   <tbody>
     <tr style="text-align:center;">
       <td></td>
-      <td>1 день</td>
-      <td>2 дня</td>
       <td>3 дня</td>
       <td>4 дня</td>
       <td>5 дней</td>
@@ -21,8 +19,6 @@
 	{
 		echo "<tr>";
 		echo "<td class=\"pricetd\">".$item['name']."</td>";
-		echo "<td>".$item['price'] * 2 ."</td>";
-		echo "<td>".$item['price'] * 1.8 ."</td>";
 		echo "<td>".$item['price'] * 1.6 ."</td>";
 		echo "<td>".$item['price'] * 1.4 ."</td>";
 		echo "<td>".$item['price']."</td>";

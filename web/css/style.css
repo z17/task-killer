@@ -16,7 +16,7 @@ a:active {text-decoration:underline; color:#000;}
 #clear {clear:both;}
 .clear {clear:both;}
 
-.redtext {color:#ff0000;}
-.bluetext {color:$0000ff;}
+.redtext, .redtext a {color:#ff0000;}
+.bluetext, .bluetext a {color:$0000ff;}
 
 .moreInfo {font-style:italic; font-size:8pt;}

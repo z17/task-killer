@@ -8,4 +8,11 @@ class Model_About extends Model
 		return $data;
 		
     }
+	 public function get_rules_data()
+    {				
+		$data['navkac'] = 'about';
+		$data['title'] = "Информация об оплате";
+		return $data;
+		
+    }
 }

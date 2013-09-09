@@ -99,6 +99,15 @@ class Base {
 		$items = $sql -> fetchAll();
 		return $items;
 	}
+	function getItemById($id)
+	{		
+		$sql = 'SELECT name FROM items WHERE id = :id';
+		$sql = $this-> base -> prepare($sql);		
+		$sql -> bindParam (':id',$id);
+		$sql -> execute();
+		$items = $sql -> fetch();
+		return $items['name'];
+	}
 	function getPrice($id)
 	{		
 		$sql = 'SELECT price FROM items WHERE id = :id';
@@ -106,7 +115,7 @@ class Base {
 		$sql -> bindParam (':id',$id,PDO::PARAM_INT);
 		$sql -> execute();
 		$price = $sql -> fetch();
-		$price = $price['price'];
+		$price = $price['price'];	// что бы вернуть не массив, а одно значение цены
 		return $price;
 	}
 	function addTask($id_author,$id_item,$time_end,$text,$file1,$file2,$file3,$price)
@@ -116,17 +125,27 @@ class Base {
 		$sql = 'INSERT INTO tasks (id_author, id_item, time_start, time_end, text, file1, file2, file3, price, status)
 				VALUES (:id_author, :id_item, :time_start, :time_end, :text, :file1, :file2, :file3, :price, :status)';
 		$sql = $this-> base -> prepare($sql);
-		$sql -> bindParam (':id_author',$id_author,PDO::PARAM_INT);
-		$sql -> bindParam (':id_item',$id_item,PDO::PARAM_INT);
-		$sql -> bindParam (':time_start',$time_start,PDO::PARAM_INT);
-		$sql -> bindParam (':time_end',$time_end,PDO::PARAM_INT);
-		$sql -> bindParam (':text',$text,PDO::PARAM_INT);
-		$sql -> bindParam (':file1',$file1,PDO::PARAM_INT);
-		$sql -> bindParam (':file2',$file2,PDO::PARAM_INT);
-		$sql -> bindParam (':file3',$file3,PDO::PARAM_INT);
-		$sql -> bindParam (':price',$price,PDO::PARAM_INT);
-		$sql -> bindParam (':status',$status,PDO::PARAM_INT);
+		$sql -> bindParam (':id_author',$id_author);
+		$sql -> bindParam (':id_item',$id_item);
+		$sql -> bindParam (':time_start',$time_start);
+		$sql -> bindParam (':time_end',$time_end);
+		$sql -> bindParam (':text',$text);
+		$sql -> bindParam (':file1',$file1);
+		$sql -> bindParam (':file2',$file2);
+		$sql -> bindParam (':file3',$file3);
+		$sql -> bindParam (':price',$price);
+		$sql -> bindParam (':status',$status);
 		$sql -> execute();
 		return $price;
+	}
+	function getAllActiveTasks()
+	{		
+		$statusStar = 'started';
+		$sql = "SELECT * FROM tasks WHERE status = 'started' ORDER by time_end";
+		$sql = $this-> base -> prepare($sql);
+		// $sql -> bindParam (':started',$statusStart); почему-то так не работает
+		$sql -> execute();
+		$tasks = $sql -> fetchAll();
+		return $tasks;
 	}
 }

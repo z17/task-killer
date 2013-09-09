@@ -14,5 +14,11 @@ class Controller_About extends Controller
 		$data['user'] = $this -> model -> user;
         $this->view->generate('about_view.php', 'template_view.php', $data);
     }
+	function action_rules()
+    {		
+        $data = $this->model->get_rules_data();
+		$data['user'] = $this -> model -> user;
+        $this->view->generate('about_rules_view.php', 'template_view.php', $data);
+    }
 
 }

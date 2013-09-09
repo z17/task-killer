@@ -2,7 +2,15 @@
 class Model_Solve extends Model
 {
     public function get_data()
-    {				
+    {		
+
+		$data['tasks'] = $this -> base -> getAllActiveTasks();
+		foreach ($data['tasks'] as  &$task)
+		{
+			$task['name_item'] = $this -> base -> getItemById($task['id_item']); 
+			$task['time_start'] = date("d.m.Y", strtotime($task['time_start']));
+			$task['time_end'] = date("d.m.Y", strtotime($task['time_end']));
+		}
 		$data['title'] = "Задачи";
 		return $data;
 		

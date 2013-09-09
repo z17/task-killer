@@ -40,7 +40,7 @@ if (!isset($data['navkac']))
 			Copyright task-killer.ru © 2011-2013<br>support@task-killer.ru
 		</div>
 		<div class="footertextl">	
-			<a href="/rules.php" title="Информация об оплате">Информация об оплате</a><br>
+			<a href="/about/rules" title="Информация об оплате">Информация об оплате</a><br>
 			<!-- begin WebMoney Transfer : attestation label --> 
 			<a href="https://passport.webmoney.ru/asp/certview.asp?wmid=215923770047" rel="nofollow" target="_blank"><img SRC="http://www.webmoney.ru/img/icons/88x31_wm_v_blue_on_white_ru.png" title="215923770047" border="0"></a>
 			<!-- end WebMoney Transfer : attestation label -->

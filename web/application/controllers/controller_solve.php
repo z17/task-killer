@@ -1,7 +1,6 @@
 <?php
 class Controller_Solve extends Controller
 {
-
 	function __construct()
     {
         $this->model = new Model_Solve();
@@ -21,5 +20,4 @@ class Controller_Solve extends Controller
 		$data['user'] = $this -> model -> user;
         $this->view->generate('solve/additem_view.php', 'solve/template_view.php', $data);
     }
-
 }

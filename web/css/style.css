@@ -1,0 +1,22 @@
+body, html {  margin:0px; padding:0px;}
+body, html, table, td { font-family:verdana, arial, helvetica; font-size: 9pt; color:#000000; }
+
+h1 {font-size:15pt;}
+h2 {font-size:13pt; margin:0px;}
+
+img {border:0px;}
+*:focus {outline: none;}
+
+a:link {text-decoration:underline; color:#000;}
+a:visited {text-decoration:underline; color:#000;}
+a:hover {text-decoration:none; color:#000;}
+a:active {text-decoration:underline; color:#000;}
+
+
+#clear {clear:both;}
+.clear {clear:both;}
+
+.redtext, .redtext a {color:#ff0000;}
+.bluetext, .bluetext a {color:$0000ff;}
+
+.moreInfo {font-style:italic; font-size:8pt;}

@@ -61,15 +61,18 @@ class Model_Profile extends Model
 			}
 			if (empty($data['errors']))
 			{
-				// если ошибок нет - регистрируем
+				// если ошибок нет - обновляем
 				$data['newPassword'] = md5(md5($data['newPassword'].$this->passkey));
 				$this -> base -> updateUser($data['user']['login'],$data['newName'],$data['newPassword'],$data['newEmail']);
+				
+				// обновляем data для вывода на странице
+				$data['user']['name'] = $data['newName'];
+				$data['user']['email'] = $data['newEmail'];
 				$data['message'] = "Профиль отредактирован";				
 			}
 			else
 			{
-				$data['message'] = "Ошибка регистрации:";
-				
+				$data['message'] = "Ошибка регистрации:";				
 			}
 		}
 		

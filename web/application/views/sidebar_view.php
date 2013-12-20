@@ -32,11 +32,11 @@
 					
 				</div>
 				<div class="loginbut">
-					<a href="forgot.php">Забыли пароль?</a>
+					<a href="/forgot">Забыли пароль?</a>
 					<input class="loginButton" type="submit" value="">
 					<input type="text" name="fl" value="true" hidden=""/>
 					<br>
-					<a href="register">Регистрация</a>
+					<a href="/register">Регистрация</a>
 				</div>
 			</form>
 		</div>

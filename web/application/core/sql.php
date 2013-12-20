@@ -31,11 +31,35 @@ class Base {
 			
 		return $fl;
 	}
+	function isUserByEmail($email)
+	{
+		$sql = 'SELECT COUNT(id) FROM users WHERE email=:email';
+		$sql = $this -> base -> prepare($sql);
+		$sql -> bindParam (':email',$email,PDO::PARAM_STR);
+		$sql -> execute();
+		$user = 0;
+		$user = $sql -> fetch();
+		if ($user['COUNT(id)'] > 0)
+			$fl = true;
+		else
+			$fl = false;
+			
+		return $fl;
+	}
 	function getUser($login)
 	{
-		$sql = 'SELECT id, id_group, name, login, password, email, balance, dateregister FROM users WHERE login=:login';
+		$sql = 'SELECT * FROM users WHERE login=:login';
 		$sql = $this -> base -> prepare($sql);
 		$sql -> bindParam (':login',$login,PDO::PARAM_STR);
+		$sql -> execute();
+		$user = $sql -> fetch();
+		return $user;
+	}
+	function getUserByEmail($email)
+	{
+		$sql = 'SELECT * FROM users WHERE email=:email';
+		$sql = $this -> base -> prepare($sql);
+		$sql -> bindParam (':email',$email,PDO::PARAM_STR);
 		$sql -> execute();
 		$user = $sql -> fetch();
 		return $user;

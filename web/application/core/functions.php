@@ -30,3 +30,28 @@ function getPostDate($str)
 	$str = substr($str, 0, -9);
 	return $str;
 }
+
+
+function sendmail($to, $subject, $message) 
+{ 
+	$mailheaders = "Content-type:text/html; charset=utf-8\r\n"; 
+//	$name =  base64_encode(iconv('UTF-8', 'CP1251', $name));		для русских заголовков
+//	$mailheaders .= "From: =?CP1251?B?".$name."?= <noreply@".$_SERVER['HTTP_HOST'].">\r\n"; 
+	$mailheaders .= "From: Task-killer <noreply@".$_SERVER['HTTP_HOST'].">\r\n"; 
+	$mailheaders .= "Reply-To: noreply@".$_SERVER['HTTP_HOST']."\r\n"; 
+	mail($to, $subject, $message, $mailheaders);
+}  
+
+
+// Генерация случайной строки (юзаю для напоминания пароля)
+function random_string($length) {
+   $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+   $chars_length = (strlen($chars) - 1);   
+   $string = $chars{rand(0, $chars_length)};   
+	for ($i = 1; $i < $length; $i = strlen($string))
+	{
+		$random = $chars{rand(0, $chars_length)};
+		if ($random != $string{$i - 1}) $string .= $random;
+	}
+	return $string;
+}

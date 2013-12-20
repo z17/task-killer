@@ -21,8 +21,8 @@ if ($data['login'] == false)
 					<input class="loginButton" name="sbm" type="submit" value="">
 					<input type="text" name="fl" value="true" hidden>
 					<br>
-					<a href="">Забыли пароль?</a> | 
-					<a href="prereg.php">Регистрация</a>
+					<a href="/forgot">Забыли пароль?</a> | 
+					<a href="/register">Регистрация</a>
 				</td>
 			</tr>
 		</table>

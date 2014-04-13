@@ -172,4 +172,13 @@ class Base {
 		$tasks = $sql -> fetchAll();
 		return $tasks;
 	}
+	function getTaskById($id)
+	{
+		$sql = 'SELECT * FROM tasks WHERE id = :id';
+		$sql = $this-> base -> prepare($sql);		
+		$sql -> bindParam (':id',$id);
+		$sql -> execute();
+		$items = $sql -> fetch();
+		return $items;
+	}
 }

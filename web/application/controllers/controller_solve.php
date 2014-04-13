@@ -20,4 +20,10 @@ class Controller_Solve extends Controller
 		$data['user'] = $this -> model -> user;
         $this->view->generate('solve/additem_view.php', 'solve/template_view.php', $data);
     }
+	
+	function action_default()
+    {		
+        $data = $this->model->get_one_data();
+        $this->view->generate('solve/solve_one_view.php', 'solve/template_view.php', $data);
+    }
 }

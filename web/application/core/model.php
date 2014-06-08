@@ -20,6 +20,7 @@ class Model
 		{
 			$userLogin = $_SESSION['userlogin'];
 			$this -> user = $this -> base -> getUser($userLogin);
+			$this -> user['dateregister'] = getPostDate($this -> user['dateregister']);
 		}
 	}
     public function get_data()

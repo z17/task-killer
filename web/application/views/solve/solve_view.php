@@ -7,7 +7,7 @@ foreach ($data['tasks'] as $task)
 		echo "<h2>".$task['name_item']."</h2>";
 		if (!empty($task['text']))
 		{
-			echo "<p>".$task['text']."</p>";
+			echo "<p>".$task['text'].'... <a href="/solve/task/'.$task['id'].'">Читать далее</a></p>';
 		}
 	?>
 		<div class="task-info">

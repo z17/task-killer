@@ -66,7 +66,7 @@ class Base {
 	}
 	function addUser($name,$login,$password,$email)
 	{
-		$id_group = 1;		// по умолчинию группа users
+		$id_group = 1;		// по умолчанию группа users
 		$balance = 0;		// по умолчанию баланс 0
 		$dateregister = date("Y-m-d H:i:s");
 		$sql = 'INSERT INTO users (id_group, name, login, password, email, balance, dateregister) 
@@ -160,7 +160,6 @@ class Base {
 		$sql -> bindParam (':price',$price);
 		$sql -> bindParam (':status',$status);
 		$sql -> execute();
-		return $price;
 	}
 	function getAllActiveTasks()
 	{		

@@ -11,7 +11,7 @@
 	<div id="leftc">
 		<!-- header -->
 		<div id="header">
-			Task-killer.ru
+			<a href="/solve">Task-killer.ru</a>
 		</div>
 		<!-- /header -->
 		<!-- content -->		

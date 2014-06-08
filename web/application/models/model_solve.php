@@ -10,6 +10,7 @@ class Model_Solve extends Model
 			$task['name_item'] = $this -> base -> getItemById($task['id_item']); 
 			$task['time_start'] = date("d.m.Y", strtotime($task['time_start']));
 			$task['time_end'] = date("d.m.Y", strtotime($task['time_end']));
+			$task['text'] = substr($task['text'], 0, 350); 
 		}
 		$data['title'] = "Задачи";
 		return $data;

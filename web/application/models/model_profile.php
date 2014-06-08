@@ -10,10 +10,9 @@ class Model_Profile extends Model
 			$data['title'] = "Профиль";
 			return $data;
 		}
+		
 		$data['login'] = true;
 		$userLogin = $_SESSION['userlogin'];
-		$data['user'] = $this -> base -> getUser($userLogin);
-		$data['user']['dateregister'] = getPostDate($data['user']['dateregister']);
 		$data['navkac'] = 'profile';
 		$data['title'] = "Профиль";
 		return $data;

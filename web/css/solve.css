@@ -5,6 +5,8 @@ body {background:#d7d7d7; }
 
 
 #header {  font-size:30pt; padding:20px 0 20px 30px; border-bottom:1px solid #f1f1f1;}
+#header a {text-decoration:none;}
+#header a:hover {text-decoration:underline;	}
 #content { width:770px; padding:10px 5px 5px 5px; }
 #sidebar{float:left;width:220px; background:#f5f5f5; margin:0px; padding:0px;}
 #leftc {float:left; width:780px;   }
@@ -33,3 +35,5 @@ a:hover {text-decoration:underline; color:#000000;}
 
 .task-info {padding:5px 0 1px 0; border-top:1px solid #f1f1f1;}
 .task-info span {padding-right:10px;}
+
+.task-img {width:300px; margin:5px;}

@@ -47,8 +47,11 @@ else
 			<li><a href="/pay">Пополнить баланс »</a></li>
 			<li><a href="/moneyback">Снять деньги »</a></li><br>
 			<li><a href="#">Заказанные задачи (3) »</a></li>
-			<li><a href="order">Оформить заказ »</a></li>
-			<li><a href="solve">Выполнить задание »</a></li>
+			<li><a href="order">Заказать задачу »</a></li>
+			<?php
+			if ($data['user']['id_group'] == 2 or $data['user']['id_group'] == 3) { ?>
+				<li><a href="solve">Выполнить задание »</a></li>
+			<?php } ?>	
           </div>
         </td>
         <td style="width:34%;">
@@ -64,6 +67,10 @@ else
 			 <p>
               Имя: 
               <b><?=$data['user']['name']?></b>
+            </p>
+			 <p>
+              Статус: 
+              <b><?=$data['user']['group']?></b>
             </p>
 			<p>
               Регистрация:

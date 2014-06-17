@@ -91,5 +91,10 @@ class Route
     {
         $host = 'http://'.$_SERVER['HTTP_HOST'].'/';
         header('Location:'.$host.'errors/access');
-    }
+	}
+	function RedirectToProfile()
+	{
+		$host = 'http://'.$_SERVER['HTTP_HOST'].'/';
+        header('Location:'.$host.'profile');
+	}
 }

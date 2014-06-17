@@ -180,4 +180,13 @@ class Base {
 		$items = $sql -> fetch();
 		return $items;
 	}
+	function getNameOfGroup($id)
+	{
+		$sql = "SELECT name FROM groups WHERE id = :id";
+		$sql = $this-> base -> prepare($sql);
+		$sql -> bindParam (':id',$id);
+		$sql -> execute();
+		$name = $sql -> fetch();
+		return $name['name'];
+	}
 }

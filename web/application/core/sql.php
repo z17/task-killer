@@ -145,14 +145,16 @@ class Base {
 	function addTask($id_author,$id_item,$time_end,$text,$file1,$file2,$file3,$price)
 	{	
 		$status = 'started';	
+		$id_performer = 0;
 		$time_start = date("Y-m-d H:i:s");	
-		$sql = 'INSERT INTO tasks (id_author, id_item, time_start, time_end, text, file1, file2, file3, price, status)
-				VALUES (:id_author, :id_item, :time_start, :time_end, :text, :file1, :file2, :file3, :price, :status)';
+		$sql = 'INSERT INTO tasks (id_author, id_item, time_start, time_end, id_performer, text, file1, file2, file3, price, status)
+				VALUES (:id_author, :id_item, :time_start, :time_end, :id_performer, :text, :file1, :file2, :file3, :price, :status)';
 		$sql = $this-> base -> prepare($sql);
 		$sql -> bindParam (':id_author',$id_author);
 		$sql -> bindParam (':id_item',$id_item);
 		$sql -> bindParam (':time_start',$time_start);
 		$sql -> bindParam (':time_end',$time_end);
+		$sql -> bindParam (':id_performer',$id_performer);
 		$sql -> bindParam (':text',$text);
 		$sql -> bindParam (':file1',$file1);
 		$sql -> bindParam (':file2',$file2);
@@ -161,16 +163,46 @@ class Base {
 		$sql -> bindParam (':status',$status);
 		$sql -> execute();
 	}
-	function getAllActiveTasks()
+	
+	function takeTask($id_task, $id_performer)
+	{
+		$status = 'performed';
+		$sql = 'UPDATE tasks SET id_performer = :id_performer, status = :status WHERE id = :id_task';
+		$sql = $this-> base -> prepare($sql);
+		$sql -> bindParam (':id_performer',$id_performer);
+		$sql -> bindParam (':status',$status);
+		$sql -> bindParam (':id_task', $id_task);
+		$sql -> execute();
+	}
+	
+	function getAllActiveTasks($id = -1)
 	{		
 		$statusStar = 'started';
-		$sql = "SELECT * FROM tasks WHERE status = 'started' ORDER by time_end";
-		$sql = $this-> base -> prepare($sql);
-		// $sql -> bindParam (':started',$statusStart); почему-то так не работает
+		if ($id > 0)
+		{
+			$sql = "SELECT * FROM tasks WHERE status = 'started' OR id_performer = :id_performer ORDER by time_end";
+		}
+		else
+		{
+			$sql = "SELECT * FROM tasks WHERE status = 'started' ORDER by time_end";
+		}
+		$sql = $this -> base -> prepare($sql);
+		$sql -> bindParam (':id_performer',$id);
 		$sql -> execute();
 		$tasks = $sql -> fetchAll();
 		return $tasks;
 	}
+	
+	function getAllTasksByPerformer($id)
+	{		
+		$sql = "SELECT * FROM tasks WHERE id_performer = :id_performer ORDER by time_end";
+		$sql = $this -> base -> prepare($sql);
+		$sql -> bindParam (':id_performer',$id);
+		$sql -> execute();
+		$tasks = $sql -> fetchAll();
+		return $tasks;
+	}
+	
 	function getTaskById($id)
 	{
 		$sql = 'SELECT * FROM tasks WHERE id = :id';

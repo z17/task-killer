@@ -45,7 +45,8 @@
 		<div class="block">			
 			<div class="blocktitle">Действия</div>
 			<div class="blockcontent">
-			<li><a href="/solve">Просмотр заданий</a></li>
+			<li><a href="/solve">Просмотр всех заданий</a></li>
+			<li><a href="/solve/mytasks">Просмотр моих заданий</a></li>
 			<li><a href="#">Сдать задачу</a></li>
 			<li><a href="#">Отказаться</a></li>
 			<li><a href="/solve/additem">Добавить предмет</a></li>

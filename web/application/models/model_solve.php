@@ -2,19 +2,25 @@
 class Model_Solve extends Model
 {
     public function get_data()
-    {		
-
-		$data['tasks'] = $this -> base -> getAllActiveTasks();
+    {	
+		$data['tasks'] = $this -> base -> getAllActiveTasks($this -> user['id']);
 		foreach ($data['tasks'] as  &$task)
 		{
 			$task['name_item'] = $this -> base -> getItemById($task['id_item']); 
 			$task['time_start'] = date("d.m.Y", strtotime($task['time_start']));
 			$task['time_end'] = date("d.m.Y", strtotime($task['time_end']));
 			$task['text'] = substr($task['text'], 0, 350); 
+			if ($task['id_performer'] == $this -> user['id'])	// если исполнитель = текущему пользователю
+			{
+				$task['performed'] = true;
+			}
+			else
+			{
+				$task['performed'] = false;
+			}
 		}
 		$data['title'] = "Задачи";
-		return $data;
-		
+		return $data;		
     }
 	public function get_additem_data()
 	{
@@ -53,6 +59,50 @@ class Model_Solve extends Model
 			$data['message'] = "Заполните форму";
 		}
 		$data['title'] = "Добавить предмет";
+		return $data;
+	}
+	
+	public function get_taketask_data()
+	{
+		$id = isset($_GET['id']) ? $_GET['id'] : NULL;	
+		
+		$data['task'] = $this -> base -> getTaskById($id);
+		
+		if ($data['task']['id_performer'] == 0 and $data['task']['status'] == 'started')
+		{
+			$this -> base -> takeTask($id, $this -> user['id']);
+			$data['message'] = 'Отлично, вы взяли задание';			
+		}
+		else
+		{
+			$data['message'] = 'Задание взял уже кто-то другой, <a href="/solve">вернуться</a>';	
+		}
+		
+		$data['title'] = 'Взять задание';
+		
+		
+		return $data;
+	}
+	
+	public function get_mytasks_data()
+	{
+		$data['tasks'] = $this -> base -> getAllTasksByPerformer($this -> user['id']);
+		foreach ($data['tasks'] as  &$task)
+		{
+			$task['name_item'] = $this -> base -> getItemById($task['id_item']); 
+			$task['time_start'] = date("d.m.Y", strtotime($task['time_start']));
+			$task['time_end'] = date("d.m.Y", strtotime($task['time_end']));
+			$task['text'] = substr($task['text'], 0, 350); 
+			if ($task['status'] == 'performed')		// если статус выполнение
+			{
+				$task['performed'] = true;
+			}
+			else
+			{
+				$task['performed'] = false;
+			}
+		}
+		$data['title'] = "Задачи";
 		return $data;
 	}
 	

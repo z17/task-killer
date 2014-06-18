@@ -2,12 +2,12 @@
 foreach ($data['tasks'] as $task)
 {
 	if ($task['performed'])
-		$performer = 'performer';
+		$performed = 'performed';
 	else
-		$performer = '';
+		$performed = '';
 	
 	?>
-	<div class="task <?=$performer?>">
+	<div class="task <?=$performed?>">
 	<?php
 		echo "<h2>".$task['name_item']."</h2>";
 		if (!empty($task['text']))

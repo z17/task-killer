@@ -4,16 +4,16 @@ class Base {
 	private $host;
 	private $baseName;
 	private $user;
-	private $login;
-	private $pass;
+	private $password;
 	
     function __construct()
     {
-		$file = parse_ini_file("/application/conf.ini");
+		$file = parse_ini_file($_SERVER['DOCUMENT_ROOT']."/application/conf.ini");
 		$this->host = $file['host'];
 		$this->baseName = $file['baseName'];
-		$this->user = $file['user'];
-		$this -> base = new PDO("mysql:host=".$this->host.";dbname=".$this->baseName, $this->user); 
+		$this->user = $file['baseUser'];
+		$this->password = $file['basePassword'];
+		$this -> base = new PDO("mysql:host=".$this->host.";dbname=".$this->baseName, $this->user, $this->password); 
 		$this -> base -> query("set names utf8");		 
     }    
 	function isUser($login)

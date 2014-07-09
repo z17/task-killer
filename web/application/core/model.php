@@ -11,8 +11,8 @@ class Model
 	{ 
 		session_start();
 		$this -> base = new Base;
-		$file = parse_ini_file("/application/conf.ini");
-		$this->passkey = $file['passkey'];
+		$file = parse_ini_file( $_SERVER['DOCUMENT_ROOT']."/application/conf.ini");
+		$this -> passkey = $file['passkey'];
 		$this -> email = $file['email'];
 		$this -> phone = $file['phone'];
 		$this -> icq = $file['icq'];

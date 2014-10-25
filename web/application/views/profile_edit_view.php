@@ -16,7 +16,7 @@
       <td style="width:600px;">
         <span id="user"></span>
         <div class="login1">
-          <input type="text" name="newName">
+          <input type="text" name="newName" value="<?=$data['user']['name']?>">
         </div>
       </td>
     </tr>
@@ -40,7 +40,7 @@
      <td>Новый e-mail:</td>
       <td>
         <div class="login1">
-          <input type="text" name="newEmail">
+          <input type="text" name="newEmail" value="<?=$data['user']['email']?>">
         </div>
       </td>
     </tr>

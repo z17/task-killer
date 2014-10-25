@@ -14,6 +14,8 @@ class Model_Order extends Model
 		
 		// + проверка размеров изображения и кучу ещё всего нужно сделать, но влом
 		
+		$data['add'] = false;
+		
 		if ($data['fl']) 
 		{			
 			$data['errors'] = array();
@@ -24,6 +26,11 @@ class Model_Order extends Model
 				$str = "Не указана дата";
 				array_push($data['errors'],$str);
 			}
+			elseif(!preg_match("/\d\d-\d\d-\d\d\d\d/", $data['date']))
+			{
+				$str = 'Некорректная дата';
+				array_push($data['errors'],$str);
+			}
 			else
 			{
 				$currentDate = date("Y-m-d");
@@ -32,9 +39,9 @@ class Model_Order extends Model
 				$data['date'] = explode("-",$data['date']);
 				$data['date'] = $data['date'][2]."-".$data['date'][1]."-".$data['date'][0]; // формирование даты в нужное представление для базы
 				
-				if ((strtotime($currentDate) > strtotime($data['date'])) or (!preg_match("/\d\d\d\d-\d\d-\d\d/",$data['date'])))
+				if (strtotime($currentDate) > strtotime($data['date']))
 				{
-					$str = 'Некорректная дата';
+					$str = 'Введённая дата уже прошла';
 					array_push($data['errors'],$str);
 				}
 				elseif (strtotime($validDate) > strtotime($data['date']))		// проверка срока сдачи заказа
@@ -47,6 +54,7 @@ class Model_Order extends Model
 					$correctDate = true;
 				}
 			}
+		
 			if ($data['itemId'] == NULL)
 			{
 				$str = "Не выбран предмет";
@@ -73,7 +81,7 @@ class Model_Order extends Model
 				}
 				if ($price > $this -> user['balance'])
 					{
-						$str = "На ващем счету недостаточно средств, <a href=\"/pay\" title=\"Пополнить счёт\">пополнить</a>";
+						$str = "На вашем счету недостаточно средств, <a href=\"/pay\" title=\"Пополнить счёт\">пополнить</a>";
 						array_push($data['errors'],$str);
 					}
 								
@@ -107,14 +115,15 @@ class Model_Order extends Model
 				$i = 0; 		// счётчик
 				foreach ($filesName as $file)
 				{		
-					$name = md5(implode($file['url']));		// создаём уникальное имя (нужно будет добавить ещё ID task)
+					$name = rand(1000, 9999).'_'.md5(implode($file['url']));		// создаём уникальное имя (нужно будет добавить ещё ID task)
 					$files[$i] = $_SERVER['DOCUMENT_ROOT']."/files/".$name.".".$file['format'];
 					move_uploaded_file($file['tmp_name'], $files[$i]);
 					// получаем url файла для записи в базу
 					$files[$i] = substr($files[$i],strlen($_SERVER['DOCUMENT_ROOT']),strlen($files[$i]) - strlen($_SERVER['DOCUMENT_ROOT']));
 					$i++;					
 				}
-				$this -> base -> addTask($this->user['id'],$data['itemId'],$data['date'],$data['task'],$files[0],$files[1],$files[2],$price);				
+				$this -> base -> addTask($this->user['id'],$data['itemId'],$data['date'],$data['task'],$files[0],$files[1],$files[2],$price);
+				$data['add'] = true;
 			}			
 		}
 		else

@@ -11,8 +11,8 @@ class Model
 	{ 
 		session_start();
 		$this -> base = new Base;
-		$file = parse_ini_file("/application/conf.ini");
-		$this->passkey = $file['passkey'];
+		$file = parse_ini_file( $_SERVER['DOCUMENT_ROOT']."/application/conf.ini");
+		$this -> passkey = $file['passkey'];
 		$this -> email = $file['email'];
 		$this -> phone = $file['phone'];
 		$this -> icq = $file['icq'];
@@ -20,6 +20,8 @@ class Model
 		{
 			$userLogin = $_SESSION['userlogin'];
 			$this -> user = $this -> base -> getUser($userLogin);
+			$this -> user['dateregister'] = date("d.m.Y", strtotime(getPostDate($this -> user['dateregister'])));
+			$this -> user['group'] = $this -> base -> getNameOfGroup($this -> user['id_group']);
 		}
 	}
     public function get_data()

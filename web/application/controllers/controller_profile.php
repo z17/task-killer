@@ -23,8 +23,8 @@ class Controller_Profile extends Controller
     }
 	function action_edit()
     {		
-        $data = $this->model->get_edit_data();
 		$data['user'] = $this -> model -> user;
+        $data = $this->model->get_edit_data();
         $this->view->generate('profile_edit_view.php', 'template_view.php', $data);
     }
 	function action_exit()

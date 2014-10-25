@@ -17,9 +17,10 @@ class Model_Login extends Model
 					$data['password'] = md5(md5($data['password'].$this -> passkey));
 					if ($data['password'] == $user['password'])
 					{
-						$data['message'] = 'Вход выполнен';
+					//	$data['message'] = 'Вход выполнен';
 						$_SESSION['userid'] = $user['id'];
 						$_SESSION['userlogin'] = $user['login'];
+						Route::RedirectToProfile();
 					}
 					else
 					{

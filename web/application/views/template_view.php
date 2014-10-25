@@ -22,7 +22,7 @@ if (!isset($data['navkac']))
 				<div class="navk" <?php if ($data['navkac']==='contacts') { ?> id="navkac" <?php }?>><a class="navk1" href="/contacts" title="Контакты">Контакты</a></div>
 				<div class="navk" <?php if ($data['navkac']==='profile') { ?> id="navkac" <?php }?>><a class="navk1" href="/profile" title="Профиль">Профиль</a></div>
 			</div> 
-			<div id="banner1"><img src="/img/banner.gif" alt=""></div>
+			<div id="screen1"><img src="/img/screen.gif" alt=""></div>
 		</div>
 	<div id="middle">
 		<div id="content">

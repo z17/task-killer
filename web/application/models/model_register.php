@@ -28,12 +28,18 @@ class Model_Register extends Model
 				$str = "Пользователь с таким логином уже существует";
 				array_push($data['errors'],$str);
 			}
+			$is_email = $this -> base -> isUserByEmail($data['email']);
+			if ($is_email)
+			{
+				$str = "Пользователь с таким адресом электронной почты уже существует";
+				array_push($data['errors'],$str);
+			}
 			if(strlen($data['password']) < 6 or strlen($data['password']) > 20)
 			{
 				$str = "Пароль должен быть не меньше 6 символов и не больше 20";
 				array_push($data['errors'],$str);
 			}
-			if (!preg_match("/^(?:[a-z0-9]+(?:[-_]?[a-z0-9]+)?@[a-z0-9]+(?:\.?[a-z0-9]+)?\.[a-z]{2,5})$/i",$data['email']))
+			if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL))
 			{
 				$str = "Некорректный e-mail";
 				array_push($data['errors'],$str);

@@ -49,5 +49,9 @@ if (!isset($data['navkac']))
 		</div>		
 	</div>
 </div>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="../js/ajax.js" type="text/javascript"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 </body>
 </html>

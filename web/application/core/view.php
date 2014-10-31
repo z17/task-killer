@@ -7,4 +7,8 @@ class View
     {
 		include 'application/views/'.$template_view;
     }
+	function generateAjax($template_view, $data = null)
+    {
+		include 'application/views/'.$template_view;
+    }
 }

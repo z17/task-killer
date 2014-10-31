@@ -13,7 +13,7 @@
 		return;
 	}	
 ?>
-<form action="/order" method="post" enctype="multipart/form-data">
+<form action="/ajax" method="post" class="ajax_form"  enctype="multipart/form-data">
 <table width="100%" cellspacing="10px" border="0px" class="orderTable">
 <tr>
 	<td>
@@ -21,7 +21,7 @@
 		<p class="moreInfo">К концу указанной даты ваш заказ будет гарантированно выполнен<br>Формат даты 25-06-2003</p>	
 	</td>
     <td>
-      <input type="text" name="date" size="10"/>
+      <input id="datepicker" type="text" name="date" size="10"/>
 	</td>
 </tr>
 <tr>

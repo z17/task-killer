@@ -221,4 +221,12 @@ class Base {
 		$name = $sql -> fetch();
 		return $name['name'];
 	}
+	function addResetUser($id,$link)
+	{
+		$sql = 'INSERT INTO reset(id_user,permalink) VALUES(:user_id,:permalink)';
+		$sql = $this-> base -> prepare($sql);
+		$sql -> bindParam (':user_id',$id);
+		$sql -> bindParam (':permalink',$link);
+		$sql -> execute();	
+	}
 }

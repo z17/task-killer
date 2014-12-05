@@ -44,4 +44,20 @@ class Model_Forgot extends Model
 		return $data;
 		
     }
+	public function reset(){
+		$data['user_reset'] = $this -> base -> getUserByEmail($_POST['email']);
+		if ($data['user_reset']){
+			$data['message'] = "Ссылка на сброс пароля выслана на указанный вами email";
+			$hash = md5($data['user_reset']['email']);
+			
+			$this -> base -> addResetUser($data['user_reset']['id'],$hash);
+			
+		}
+		else{
+			$data['message'] = "Пользователь не найден.";
+		}
+		
+		$data['title'] = 'Сброс пароля';
+		return $data;
+	}
 }

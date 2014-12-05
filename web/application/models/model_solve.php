@@ -1,8 +1,8 @@
 <?php
 class Model_Solve extends Model
-{
+{	
     public function get_data()
-    {	
+    {
 		$data['tasks'] = $this -> base -> getAllActiveTasks($this -> user['id']);
 		foreach ($data['tasks'] as  &$task)
 		{
@@ -17,6 +17,10 @@ class Model_Solve extends Model
 			else
 			{
 				$task['performed'] = false;
+			}
+			if ($this -> user['id_group'] == 2)
+			{
+				$task['price'] *= $this -> ratio;
 			}
 		}
 		$data['title'] = "Задачи";

@@ -7,6 +7,7 @@ class Model
 	public $email;
 	public $phone;
 	public $icq;
+	public $ratio;
 	function __construct()
 	{ 
 		session_start();
@@ -16,6 +17,7 @@ class Model
 		$this -> email = $file['email'];
 		$this -> phone = $file['phone'];
 		$this -> icq = $file['icq'];
+		$this -> ratio = $file['solver_ratio'];
 		if (isset($_SESSION['userid']))
 		{
 			$userLogin = $_SESSION['userlogin'];
